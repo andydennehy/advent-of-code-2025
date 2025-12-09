@@ -12,15 +12,9 @@ func Check(e error) {
 	}
 }
 
-func ParseInput(filename string) []string {
+func ParseInput(filename string) (*bufio.Scanner, *os.File) {
 	file, err := os.Open(filename)
-	Check(err)
-	defer file.Close()
-
-	var lines []string
+	Check(err)	
 	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines
+	return scanner, file
 }

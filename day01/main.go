@@ -8,7 +8,13 @@ import (
 )
 
 func main() {
-	lines := utils.ParseInput("input.txt")
+	scanner, file := utils.ParseInput("input.txt")
+	defer file.Close()
+
+	var lines []string
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
 	fmt.Println(part1(lines))
 	fmt.Println(part2(lines))
 }
